@@ -1,21 +1,23 @@
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import React, {useState} from 'react';
-import {UserContent} from './UserContent';
+import {UserContext} from './UserContext';
 import Chat from './components/chat/Chat';
 import Home from './components/home/Home';
+import Navbar from './components/layout/Navbar';
 
 function App() {
   const [user, setUser] = useState(null)
   return (
     <Router>
       <div className="App">
-        <UserContent.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, setUser}}>
+          <Navbar/>
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/chat' component={Chat}/>
           </Switch>
-        </UserContent.Provider>
+        </UserContext.Provider>
       </div>
     </Router>
   );
