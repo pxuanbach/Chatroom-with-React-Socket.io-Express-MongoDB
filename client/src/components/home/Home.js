@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../UserContext'
 import { Link } from 'react-router-dom';
 import RoomList from './RoomList';
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 let socket;
 
 const Home = () => {
-    const ENDPOINT = 'http://localhost:8081';
+    const ENDPOINT = 'http://localhost:8082';
     useEffect(() => {
         socket = io(ENDPOINT);
         return () => {
