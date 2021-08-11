@@ -14,11 +14,12 @@ const Navbar = () => {
                     </ul>
                 </div>
             </nav>
-            <ul class="sidenav" id="mobile-demo">
+            <ul className="sidenav" id="mobile-demo">
                 <li><a href="#">Login</a></li>
                 <li><a href="#">SignUp</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
+
         </>
     )
 }
