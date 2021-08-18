@@ -1,15 +1,45 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react';
+import {UserContext} from '../../UserContext';
+import {Redirect} from 'react-router-dom';
 
 const Signup = () => {
+    const {user, setUser} = useContext(UserContext);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [nameError, setNameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
+        setNameError('');
+        setEmailError('');
+        setPasswordError('');
+
         console.log(name, email, password);
+        try {
+            const res = await fetch('http://localhost:8082/signup', {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify({name, email, password}),
+                headers: {'Content-Type':'application/json'}
+            })
+            const data = await res.json();
+            console.log(data)
+            if (data.errors) {
+                setNameError(data.errors.name);
+                setEmailError(data.errors.email);
+                setPasswordError(data.errors.password);
+            }
+            if (data.user) {
+                setUser(data.user);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    if (user) {
+        return <Redirect to='/'/>
     }
     return (
         <div>
