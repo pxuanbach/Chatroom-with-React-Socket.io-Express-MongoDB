@@ -37,7 +37,7 @@ module.exports.signup = async (req, res) => {
         res.status(400).json({ errors })
         //res.status(400).send('Fail to create user');
     }
-    res.send('singup')
+    res.send()
 }
 module.exports.login = async (req, res) => {
     const { email, password } = req.body;
@@ -50,7 +50,7 @@ module.exports.login = async (req, res) => {
         let errors = alertError(error);
         res.status(400).json({ errors })
     }
-    res.send('login')
+    res.send()
 }
 module.exports.verifyuser = (req, res, next) => {
     const token = req.cookies.jwt;
